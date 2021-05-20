@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 04-Maio-2021 às 03:11
+-- Tempo de geração: 21-Maio-2021 às 01:36
 -- Versão do servidor: 10.4.18-MariaDB
 -- versão do PHP: 7.4.16
 
@@ -51,16 +51,18 @@ CREATE TABLE `clientes` (
   `bairro` varchar(45) DEFAULT NULL,
   `cidade` varchar(45) DEFAULT NULL,
   `estado` varchar(45) DEFAULT NULL,
-  `ponto_ref` varchar(45) DEFAULT NULL,
-  `senha` varchar(45) DEFAULT NULL
+  `ponto_ref` varchar(45) NOT NULL,
+  `senha` varchar(45) DEFAULT NULL,
+  `nivel` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `clientes`
 --
 
-INSERT INTO `clientes` (`cpf`, `nome`, `email`, `nascimento`, `cep`, `endereco`, `numero`, `complemento`, `bairro`, `cidade`, `estado`, `ponto_ref`, `senha`) VALUES
-(434655418, 'Isabella de Oliveira Lopes', 'isabellaoliveira518@gmail.com', '2003-07-20', '13825-000', 'Rua Pennings', 160, 'Casa 02', 'Residencial Imigrantes', 'Holambra', 'SP', 'Perto da quadra', 'cd00e92ca5ea66277a61922b551c2941');
+INSERT INTO `clientes` (`cpf`, `nome`, `email`, `nascimento`, `cep`, `endereco`, `numero`, `complemento`, `bairro`, `cidade`, `estado`, `ponto_ref`, `senha`, `nivel`) VALUES
+(12122, 'Ana Lopea', 'ana@gmail.com', '2021-05-27', '06900-000', 'Rua das Paineiras', 1263, 'Casa', 'Granjinha', 'Embu-Guaçu', 'SP', '', '9e10db1233c6e39d5adcc9c76eec9df1', 1),
+(434655418, 'Isabella de Oliveira Lopes', 'isabellaoliveira518@gmail.com', '2003-07-20', '13825-000', 'Rua Pennings', 160, 'Casa 02', 'Residencial Imigrantes', 'Holambra', 'SP', 'Perto do campo', 'e10adc3949ba59abbe56e057f20f883e', 2);
 
 -- --------------------------------------------------------
 
@@ -79,6 +81,25 @@ CREATE TABLE `mensagens` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `ofertas`
+--
+
+CREATE TABLE `ofertas` (
+  `email` varchar(245) NOT NULL,
+  `nomeCompleto` varchar(245) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `ofertas`
+--
+
+INSERT INTO `ofertas` (`email`, `nomeCompleto`) VALUES
+('ana@2002', 'Ana Luiza'),
+('isabellaoliveira518@gmail.com', 'Isabella de Oliveira Lopes');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `pedidos`
 --
 
@@ -88,8 +109,20 @@ CREATE TABLE `pedidos` (
   `idproduto` int(11) DEFAULT NULL,
   `data` date DEFAULT NULL,
   `qtd` int(11) DEFAULT NULL,
-  `status` varchar(45) DEFAULT NULL
+  `status` varchar(45) DEFAULT NULL,
+  `desconto` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `pedidos`
+--
+
+INSERT INTO `pedidos` (`idpedidos`, `cpf`, `idproduto`, `data`, `qtd`, `status`, `desconto`) VALUES
+(1, 434655418, 1, '2021-05-12', 2, 'Pedido entregue', 0),
+(2, 12122, 1, '2021-05-19', 1, 'Pedido recebido', 0),
+(45, 434655418, 13, '2021-05-19', 1, 'Pedido recebido', 3.33333),
+(46, 434655418, 14, '2021-05-19', 2, 'Pagamento aprovado', 3.33333),
+(47, 434655418, 15, '2021-05-19', 1, 'Pedido recebido', 3.33333);
 
 -- --------------------------------------------------------
 
@@ -114,7 +147,28 @@ CREATE TABLE `produto` (
 --
 
 INSERT INTO `produto` (`id`, `nome`, `preco`, `descricao`, `ficha_tecnica`, `quantidade`, `situacao`, `criado`, `imagem`) VALUES
-(1, 'carvão', '10', 'preto', 's', 5, 'Disponível', '2021-05-02 23:10:18', '2021.05.03-04.10.18jpeg');
+(1, 'Carvão 2kg', '26', 'Preto', 'teste', 10, 'Disponível', '2021-05-02 23:10:18', '2021.05.18-21.19.46jpeg'),
+(13, 'Zézinho', '42', 'Bom demais para logos', '', 170, 'Disponível', '2021-05-11 14:00:26', '2021.05.11-19.00.26.png'),
+(14, 'Zézinho', '41', 'Bom demais para logos', '', 170, 'Disponível', '2021-05-11 14:11:48', '2021.05.17-15.44.53jpeg'),
+(15, 'oo', '14', 'uuutgv hgvfgh jhbj', '', 9, 'Disponível', '2021-05-11 14:16:33', '2021.05.11-19.16.33.png');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `promocao`
+--
+
+CREATE TABLE `promocao` (
+  `codpromo` varchar(11) NOT NULL,
+  `valordesconto` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `promocao`
+--
+
+INSERT INTO `promocao` (`codpromo`, `valordesconto`) VALUES
+('DESC10', 10);
 
 --
 -- Índices para tabelas despejadas
@@ -139,6 +193,12 @@ ALTER TABLE `mensagens`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices para tabela `ofertas`
+--
+ALTER TABLE `ofertas`
+  ADD PRIMARY KEY (`email`(45));
+
+--
 -- Índices para tabela `pedidos`
 --
 ALTER TABLE `pedidos`
@@ -149,6 +209,12 @@ ALTER TABLE `pedidos`
 --
 ALTER TABLE `produto`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `promocao`
+--
+ALTER TABLE `promocao`
+  ADD PRIMARY KEY (`codpromo`);
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
@@ -164,13 +230,13 @@ ALTER TABLE `mensagens`
 -- AUTO_INCREMENT de tabela `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `idpedidos` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idpedidos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT de tabela `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

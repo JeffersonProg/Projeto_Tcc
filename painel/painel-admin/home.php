@@ -78,9 +78,9 @@ excluir usuários e também a possibilidade de gerenciar pedidos e novos adminis
 <table class="estilopequeno">
   <tbody>
     <tr>
-      <td class="botaoo" style="background-color:#20B2AA">LISTAR POSTAGENS</td>
+      <td class="botaoo" style="background-color:#20B2AA">LISTAR PRODUTOS</td>
       <td class="botaoo" style="background-color:#008B8B">LISTAR USUÁRIOS</td>
-      <td class="botaoo" style="background-color:#008080">CADASTRAR UBS</td>
+      <td class="botaoo" style="background-color:#008080">CADASTRAR PEDIDOS</td>
 
     </tr>
   </tbody>

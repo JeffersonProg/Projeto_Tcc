@@ -1,7 +1,7 @@
 <?php 
 
 function getProducts($pdo){
-	$sql = "SELECT *  FROM produto ";
+	$sql = "SELECT *  FROM produto";
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute();
 	return $stmt->fetchAll(PDO::FETCH_ASSOC);

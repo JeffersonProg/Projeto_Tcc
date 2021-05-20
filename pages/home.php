@@ -10,7 +10,7 @@
 }
 
 .form-holder { 
-	  background-color: #db371a;
+	  background-color: black;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -195,18 +195,28 @@
                     <div class="form-items">
                         <h3>Receber ofertas?</h3>
                         <p>Cadastre-se para ficar por dentro de tudo.</p>
-                        <form action="#" method="post" class="requires-validation" novalidate>
+                        <form action="processoOfertas" method="post" class="requires-validation" novalidate>
 
                             <div class="col-md-12">
-                               <input class="form-control" type="text" name="name" placeholder="Nome completo" required>
+                               <input class="form-control" type="text" name="Ofname" placeholder="Nome completo" required>
                             </div>
 
                             <div class="col-md-12">
-                                <input class="form-control" type="email" name="email" placeholder="Endereço de e-mail" required>
+                                <input class="form-control" type="email" name="Ofemail" placeholder="Endereço de e-mail" required>
                             </div>                 
 
                             <div class="form-button mt-3">
-                                <button id="submit" type="submit" class="btn btn-primary">Cadastrar</button>
+                                <button id="submit" type="submit" name="acao" class="btn btn-primary">Cadastrar</button>
+                                <p class="text-center text-danger">
+			<?php if(isset($_SESSION['erro'])){
+                echo $_SESSION['erro'];
+				        unset($_SESSION['erro']);}?>
+		</p> 
+		<p class="text-center text-success">
+			<?php if(isset($_SESSION['sucesso'])){
+				echo $_SESSION['sucesso'];
+				unset($_SESSION['sucesso']);}?>
+    </p>
                             </div>
                         </form>
                     </div>

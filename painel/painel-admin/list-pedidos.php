@@ -134,7 +134,13 @@ while($dado1 = $resultado1_postagem ->fetch_array()){
                    <?php if($status == "Pagamento aprovado"){ echo "style='color:#FFA500'";}?>
                    <?php if($status == "Nota Fiscal disponível"){ echo "style='color:#FF8C00'";}?>
                    ><?php echo $dado["status"];?></a>
-                   <?php if($status == "Pedido entregue"){ echo "<div style='float:right;color:gray'>entregue dia <a class='list' style='color: #40CD28'>". $dado['data']."</div>";}?></a>
+                   <?php if($status == "Pedido entregue"){ echo "<div style='float:right;color:gray'>entregue dia <a class='list' style='color: #40CD28'>". $dado['data']."</div>";}?>
+                   <?php if($status == "Cancelado"){ echo "<div style='float:right;color:gray'>cancelado dia <a class='list' style='color: #E60014'>". $dado['data']."</div>";}?>
+                   <?php if($status == "Em transporte"){ echo "<div style='float:right;color:gray'>atualizado dia <a class='list' style='color: #ffd700'>". $dado['data']."</div>";}?>
+                   <?php if($status == "Pedido recebido"){ echo "<div style='float:right;color:gray'>atualizado dia <a class='list' style='color: #0000ff'>". $dado['data']."</div>";}?>
+                   <?php if($status == "Pagamento aprovado"){ echo "<div style='float:right;color:gray'>aprovado dia <a class='list' style='color: #FFA500'>". $dado['data']."</div>";}?>
+                   <?php if($status == "Nota Fiscal disponível"){ echo "<div style='float:right;color:gray'>atualizado dia <a class='list' style='color: #FF8C00'>". $dado['data']."</div>";}?>
+                  </a>
                     </div>
 
 <br>
@@ -160,7 +166,7 @@ while($dado1 = $resultado1_postagem ->fetch_array()){
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
+      </div> 
       <div class="modal-body">
        
 

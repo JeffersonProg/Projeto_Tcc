@@ -48,20 +48,20 @@ input{
 	<header>
 
 	<nav class="navbarespaco navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="index.php"><img class="logo" src="../imagens/ZezinhoLOGO.svg"></a>
+  <a class="navbar-brand" href="../index.php"><img class="logo" src="../imagens/ZezinhoLOGO.svg"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
- 	<form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-	  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  <nav class="navbar navbar-light bg-light justify-content-between">
+  <form class="form-inline" action="pesquisar.php" method="post">
+    <input class="form-control mr-sm-2" type="search" name="pesquisar" placeholder="Procurar" aria-label="Search">
+    <button class="btn btn-dark my-2 my-sm-0" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
   <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-</svg>
-	  </button>
-    </form>
+</svg></button>
+  </form>
+</nav>
 
     <div class="navbar-nav">
       <a class="nav-item nav-link active" href="../index.php">Home<span class="sr-only">(current)</span></a>
@@ -155,8 +155,14 @@ input{
 
                 <div class="form-label-group">
                 <input type="password" name="senha" id="inputPassword" class="form-control" placeholder="Senha (minímo 6 caracteres)">
-                <label for="inputPassword">Senha</label>
+                <label for="inputPassword">Senha atual</label>
                 </div>    
+
+                <div class="form-label-group">
+                <input type="password" name="confirmarSenha" id="inputPassword1" class="form-control" placeholder="Senha (minímo 6 caracteres)">
+                <label for="inputPassword1">Senha nova</label>
+                </div>    
+
 
               <br>
               <h6>Endereço de cobrança<h6>
@@ -212,6 +218,17 @@ input{
 			<?php if(isset($_SESSION['sucesso'])){
 				echo $_SESSION['sucesso'];
 				unset($_SESSION['sucesso']);}?>
+    </p>
+
+    <p class="text-center text-danger">
+			<?php if(isset($_SESSION['erro1'])){
+                echo $_SESSION['erro1'];
+				        unset($_SESSION['erro1']);}?>
+		</p> 
+		<p class="text-center text-success">
+			<?php if(isset($_SESSION['sucesso1'])){
+				echo $_SESSION['sucesso1'];
+				unset($_SESSION['sucesso1']);}?>
     </p>
           <br>
                 <div style="text-align:center"> 
