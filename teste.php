@@ -26,18 +26,12 @@ session_start();
     $ref = $_POST['pont_ref']; 
     $nivel = 1;
 
-    //cadastrar clientes de forma automatica 
-    $sql = $pdo->prepare("INSERT INTO clientes(email,nome,nascimento,cpf,cep,endereco,numero,complemento,bairro,cidade,estado,ponto_ref,senha,nivel) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-
-    $sql->execute(array($email,$nome,$nascimento,$cpf,$cep,$endereco,$numero,$complemento,$bairro,$cidade,$estado,$ref,$_SESSION['senha'],$nivel));
-    if($sql){
-        $_SESSION['cadastroSucesso'] = "Usuário cadastrado com sucesso";
-        header("Location: pages/usuario.php");
-    }
-    else{
-        $_SESSION['cadastroErro'] = "Erro ao cadastrar usuário";
-        header("Location: pages/usuario.php");
-    }
+   echo $_POST['cepp']."<br>";
+   echo $_POST['ruaa']."<br>";
+   echo $_POST['bairoo']."<br>";
+   echo $_POST['cidadee']."<br>";
+   echo $_POST['uff']."<br>";
+   echo $_POST['ibgee']."<br>";
 }
 
 

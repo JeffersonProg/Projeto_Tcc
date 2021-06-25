@@ -2,9 +2,11 @@
 include_once('conexao.php');
 $result1_postagem = "SELECT * FROM produto";
 $resultado1_postagem = mysqli_query($conn, $result1_postagem);
+$result2_postagem = "SELECT * FROM promocao";
+$resultado2_postagem = mysqli_query($conn, $result2_postagem);
 ?>	
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -116,9 +118,56 @@ body {
 <div class="postagem">
 <h3>LISTA DE PRODUTOS</h3>
 </div><br> 
-<a class="addprod btn btn-primary" href="painel-admin/cadastroproduto.php" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+<div class="addprod">
+<a class="btn btn-primary" href="painel-admin/cadastroproduto.php" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
   <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
 </svg>Adicionar produto</a>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+</svg>Adicionar cupom
+</button>
+<!-- Button trigger modal -->
+<a type="button" class="btn btn-primary" style="color:white" href="painel-admin/deletar-cupom.php">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+  <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+</svg> Excluir cupom
+</a>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cupom de desconto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  <center><h5>Cupons já existentes</h5></center>
+	 <?php while($dados = $resultado2_postagem->fetch_array()){ $codpromocao = $dados['codpromo'];echo "Código: ".$dados['codpromo']." | Valor de desconto: R$".number_format($dados['valordesconto'], 2, ',', '.')."<br>";}?> 
+  
+
+   <br><br> <center><h5>Adicionar cupom</h5></center>
+   <form action="painel-admin/cadastrocupom.php" method="post">
+   <label for="cood">Código da promoção:</label>
+   <input id="cood" type="text" name="codPromo">
+   <label for="valoor">Valor de desconto:</label>
+   <input id="valoor" type="number" step="any" name="valorDesc"><br>
+   <button type="submit" name="acao" class="btn btn-success" style="float:right">Adicionar</button>
+</form>
+<br>
+	  </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        
+      </div>
+    </div>
+  </div> <!-- fim modal -->
+  
+</div>
 <div class="body2">
 <?php while($dado = $resultado1_postagem ->fetch_array()){ ?> 
 

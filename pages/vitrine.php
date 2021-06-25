@@ -24,16 +24,16 @@ $result1_postagem = "SELECT * FROM produto";
 $resultado1_postagem = mysqli_query($conn, $result1_postagem);
 ?>	
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<title>ZEZINHO </title>
+<title>Zezinho do Carvão - o N° 1 em preço baixo.</title>
 
 <!-- Js css -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-<link href="../estilo/style.css" rel="stylesheet">
+<link rel="icon" href="../imagens/ZeLOGO.svg" >
+<link href="../estilo/estilo.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="keywords" content="palavras-chave,do,meu,site">
 <meta name="description" content="Descrição do meu website">
@@ -43,6 +43,16 @@ $resultado1_postagem = mysqli_query($conn, $result1_postagem);
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<style type="text/css">
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
+
+*, body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 .body2{
     margin-left:2%;
 	height:500%;
@@ -90,7 +100,7 @@ $resultado1_postagem = mysqli_query($conn, $result1_postagem);
 	<header>
 
 	<nav class="navbarespaco navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="../index.php"><img class="logo" src="../imagens/ZezinhoLOGO.svg"></a>
+  <a class="navbar-brand" href="../index.php"><img class="logo" src="../imagens/ZeLOGO.svg"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -163,13 +173,15 @@ $resultado1_postagem = mysqli_query($conn, $result1_postagem);
 </a>
 </form>
 
-<?php	}	?>	 							
+
+<?php	}	?>	 			
+			
 </div>
-<footer>
-<div class="footer">	
-	<div class="center">
+
+<footer class="footer">
+
 	<p> ® Zezinho do carvão – Todos os direitos reservados</p>
-	</div>
+	
 </div>	
 </footer>
 	

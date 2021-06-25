@@ -1,16 +1,28 @@
-<?php session_start();?>
+<?php 
+// A sessão precisa ser iniciada em cada página diferente
+if (!isset($_SESSION)) session_start();
+$nivel_necessario = 2;
+  
+// Verifica se não há a variável da sessão que identifica o usuário
+if (!isset($_SESSION['usuarioCpf']) OR ($_SESSION['nivel'] < $nivel_necessario)) {
+  // Destrói a sessão por segurança
+  session_destroy();
+  // Redireciona o visitante de volta pro login
+  header("Location: ../login.php"); exit;
+}
+?>
 <!DOCTYPE html>
 <html>
 
 <head>
 <meta charset="UTF-8"/>
-<title>cadastro de Produto</title>
-
+<title>Cadastro de Produto - Zezinho do Carvão</title>
+<link rel="icon" href="../../imagens/ZeLOGO.svg" >
 <!-- Js css -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href="../../estilo/style.css" rel="stylesheet">
+<link href="../../estilo/estilo.css" rel="stylesheet">
 <style type="text/css">
 body {
   margin: 0 auto;
@@ -18,14 +30,14 @@ body {
 }
 
 .navcor{
-    background-color:#17a2b8;
+    background-color:#1E90FF;
     color:white;
     font-size:17px;
     font-weight:bold;
 }
 
 .navcor1{
-    background-color:#17a2b8;
+    background-color:#1E90FF;
     color:white;
     font-size:17px;
     font-weight:bold;
@@ -37,7 +49,7 @@ body {
 }
 
 .botaonovo{
-    background-color:#17a2b8;
+    background-color:#1E90FF;
     color:white;
     border:none;
     color:white;
@@ -122,7 +134,7 @@ body {
               </div>
 
               <div class="form-label-group">
-              <input type="number" id="inputPreco" name="preco" class="form-control" placeholder="Email" required autofocus>
+              <input type="number" step="any" id="inputPreco" name="preco" class="form-control" placeholder="Email" required autofocus>
               <label for="inputPreco">Preço</label>
               </div>
 
@@ -135,7 +147,7 @@ body {
               <input type="Number" id="inputQuantidade" name="quantidade" class="form-control" placeholder="Email" required autofocus>
               <label for="inputQuantidade">Quantidade</label>
               </div>
-
+              
               <br><h6>Ficha ténica<h6>
 
               <div class="form-label-group">

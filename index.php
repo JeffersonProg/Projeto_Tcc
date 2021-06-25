@@ -1,35 +1,36 @@
 <?php
 	session_start();
-	if (!isset($_SESSION['usuarioNome'])) {
-		// Destrói a sessão por segurança
-		session_destroy();
-		// Redireciona o visitante de volta pro login
-		//header("Location: index.php"); exit;
-	}
-
-	
+  
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>ZEZINHO </title>
-
+	<title>Zezinho do Carvão - o N° 1 em preço baixo. </title>
+	<link rel="icon" href="imagens/ZeLOGO.svg" >
 	<!-- Js css -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-	<link href="estilo/style.css" rel="stylesheet">
+	<link href="estilo/estilo.css" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="palavras-chave,do,meu,site">
 	<meta name="description" content="Descrição do meu website">
 	<meta charset="utf-8" />
+	<style>
+	  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
+
+*, body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+}
+</style>
 </head>
-
-
-
 <body>
-
 
 	<!--jquery e poppy -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -39,7 +40,7 @@
 	<header>
 
 	<nav class="navbarespaco navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="index.php"><img class="logo" src="imagens/ZezinhoLOGO.svg"></a>
+  <a class="navbar-brand" href="index.php"><img class="logo" src="imagens/ZeLOGO.svg"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>

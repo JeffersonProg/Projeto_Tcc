@@ -26,7 +26,7 @@ $resultado2 = mysqli_query($conn, $result2);
 $resultado1_postagem = mysqli_query($conn, $result1_postagem);
 ?>	
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,9 +38,19 @@ $resultado1_postagem = mysqli_query($conn, $result1_postagem);
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <link href="../estilo/style.css" rel="stylesheet">
+    <link href="../estilo/estilo.css" rel="stylesheet">
 
 	<style type="text/css">
+	  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
+
+*, body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 	body{
 		background-color:white;
 	}
@@ -156,7 +166,7 @@ a.list{
 	<header>
 
 	<nav class="navbarespaco navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="../index.php"><img class="logo" src="../imagens/ZezinhoLOGO.svg"></a>
+  <a class="navbar-brand" href="../index.php"><img class="logo" src="../imagens/ZeLOGO.svg"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -251,11 +261,6 @@ a.list{
 	<p> ® Zezinho do carvão – Todos os direitos reservados</p>
 	</div>
 </footer>
-	
-	
-	
-	
-
 </body>
 </html>	
 

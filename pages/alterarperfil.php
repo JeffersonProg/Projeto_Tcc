@@ -11,7 +11,7 @@ session_start();
       
       $nome = $_POST['nome'];
       $nascimento = $_POST['nascimento'];
-      $cpf = $_POST['cpf'];
+      $cpf = $_SESSION['usuarioCpf'];;
       $cep = $_POST['cep']; 
       $endereco = $_POST['endereco'];
       $numero = $_POST['numero'];
@@ -26,6 +26,7 @@ session_start();
       $sql = $pdo->prepare("UPDATE clientes SET nome=?,nascimento=?,cep=?,endereco=?,numero=?,complemento=?,bairro=?,cidade=?,estado=?,ponto_ref=? WHERE cpf=?");
       $sql->execute(array($nome,$nascimento,$cep,$endereco,$numero,$complemento,$bairro,$cidade,$estado,$ref,$cpf));
       
+     
       $senhatual = $_POST['senha'];
       $_SESSION['senha'] = mysqli_real_escape_string($conn, $senhatual);
       $_SESSION['senha'] = md5($_SESSION['senha']);

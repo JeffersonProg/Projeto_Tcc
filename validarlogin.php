@@ -21,12 +21,14 @@
         $sql = "SELECT * FROM clientes WHERE email = '$email' && senha = '$senha' LIMIT 1";
         $result = $pdo->query($sql);
         $rows = $result->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($rows as &$value) {
+        
+         foreach ($rows as &$value) {
             $_SESSION['usuarioNome'] = $value['nome'];
-            $_SESSION['usuarioEmail'] = $value['email'];
             $_SESSION['usuarioCpf'] = $value['cpf'];
-        }
-               header("Location: index.php");
+            $_SESSION['nivel'] = $value['nivel'];
+         }
+        
+         header("Location: index.php");
     }
     else{
         $_SESSION['loginErro'] = "Usuário ou Senha inválida";
@@ -34,7 +36,7 @@
     }
 
 
-
+ 
 
  
 ?>

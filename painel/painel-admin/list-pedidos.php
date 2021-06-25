@@ -4,7 +4,7 @@ $result2_postagem = "SELECT * FROM pedidos";
 $resultado2_postagem = mysqli_query($conn, $result2_postagem);
 ?>	
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -146,7 +146,7 @@ while($dado1 = $resultado1_postagem ->fetch_array()){
 <br>
 <img src="../imagens/produtos/<?php echo $dado1["imagem"];?> " class="imagemProduto">
 <div style="float:left; margin-left:2%;margin-top:1%"><?php echo $dado1["nome"]."<br>";?>
-<a class="list"><?php echo $dado['qtd']." unidade - R$". $dado1["preco"]*$dado['qtd']."<br>";?></div>
+<a class="list"><?php echo $dado['qtd']." unidade - R$".  number_format($dado1["preco"]*$dado['qtd'], 2, ',', '.')."<br>";?></div>
 
 
 
@@ -175,12 +175,12 @@ while($dado1 = $resultado1_postagem ->fetch_array()){
 <label for="status-pedido">Status do Pedido:</label>
 
 <select name="statusPedido" id="status-pedido">
-  <option value="Pedido recebido">Pedido recebido</option> azul
-  <option value="Pagamento aprovado">Pagamento aprovado</option> azul
-  <option value="Nota Fiscal disponível">Nota Fiscal disponível</option> azul
-  <option value="Em transporte">Em transporte</option> amarelo
-  <option value="Pedido entregue">Pedido Entregue</option> verde
-  <option value="Cancelado">Cancelado</option> vermelho
+  <option value="Pedido recebido">Pedido recebido</option> 
+  <option value="Pagamento aprovado">Pagamento aprovado</option> 
+  <option value="Nota Fiscal disponível">Nota Fiscal disponível</option> 
+  <option value="Em transporte">Em transporte</option> 
+  <option value="Pedido entregue">Pedido Entregue</option> 
+  <option value="Cancelado">Cancelado</option> 
   <option value="" selected></option>
 </select>
 

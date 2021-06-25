@@ -1,5 +1,15 @@
 <?php 
-if(!isset($_SESSION['cpf'])){header("Location: usuario.php");}
+// A sessão precisa ser iniciada em cada página diferente
+if (!isset($_SESSION)) session_start();
+$nivel_necessario = 1;
+  
+// Verifica se não há a variável da sessão que identifica o usuário
+if (!isset($_SESSION['usuarioCpf']) OR ($_SESSION['nivel'] < $nivel_necessario)) {
+  // Destrói a sessão por segurança
+  session_destroy();
+  // Redireciona o visitante de volta pro login
+  header("Location: ../pages/usuario.php"); exit;
+}
 $conn = mysqli_connect("localhost", "root","", "projeto_tcc");
 $_GET['valor'];
 $desconto =0;

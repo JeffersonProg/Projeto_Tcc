@@ -1,6 +1,15 @@
 <?php
-session_start();
-
+// A sessão precisa ser iniciada em cada página diferente
+if (!isset($_SESSION)) session_start();
+$nivel_necessario = 1;
+  
+// Verifica se não há a variável da sessão que identifica o usuário
+if (!isset($_SESSION['usuarioCpf']) OR ($_SESSION['nivel'] < $nivel_necessario)) {
+  // Destrói a sessão por segurança
+  session_destroy();
+  // Redireciona o visitante de volta pro login
+  header("Location: ../pages/usuario.php"); exit;
+}
 	$servidor = "localhost";
 	$usuario = "root";
 	$senha = "";
@@ -14,16 +23,16 @@ $resultado_postagem = mysqli_query($conn, $result_postagem);
      
 ?>	
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<title>ZEZINHO </title>
-
+<title>Minha conta - Zezinho do Carvão</title>
+<link rel="icon" href="../imagens/ZeLOGO.svg" >
 <!-- Js css -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<link href="../estilo/style.css" rel="stylesheet">
+<link href="../estilo/estilo.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="keywords" content="palavras-chave,do,meu,site">
 <meta name="description" content="Descrição do meu website">
@@ -32,10 +41,58 @@ $resultado_postagem = mysqli_query($conn, $result_postagem);
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
+
+*, body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 input{
     margin-bottom:8px;
 }
 </style>
+<script>
+  function isValidCPF(cpf) {
+            if (typeof cpf !== "string") return false
+            cpf = cpf.replace(/[\s.-]*/igm, '')
+            if (
+                !cpf ||
+                cpf.length != 11 ||
+                cpf == "00000000000" ||
+                cpf == "11111111111" ||
+                cpf == "22222222222" ||
+                cpf == "33333333333" ||
+                cpf == "44444444444" ||
+                cpf == "55555555555" ||
+                cpf == "66666666666" ||
+                cpf == "77777777777" ||
+                cpf == "88888888888" ||
+                cpf == "99999999999" 
+            ) {
+                return false
+            }
+            var soma = 0
+            var resto
+            for (var i = 1; i <= 9; i++) 
+                soma = soma + parseInt(cpf.substring(i-1, i)) * (11 - i)
+            resto = (soma * 10) % 11
+            if ((resto == 10) || (resto == 11))  resto = 0
+            if (resto != parseInt(cpf.substring(9, 10)) ) return false
+            soma = 0
+            for (var i = 1; i <= 10; i++) 
+                soma = soma + parseInt(cpf.substring(i-1, i)) * (12 - i)
+            resto = (soma * 10) % 11
+            if ((resto == 10) || (resto == 11))  resto = 0
+            if (resto != parseInt(cpf.substring(10, 11) ) ) return false
+            return true
+        }
+
+      </script>
+</script>
 </head>
 <body>
 
@@ -48,7 +105,7 @@ input{
 	<header>
 
 	<nav class="navbarespaco navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="../index.php"><img class="logo" src="../imagens/ZezinhoLOGO.svg"></a>
+  <a class="navbar-brand" href="../index.php"><img class="logo" src="../imagens/ZeLOGO.svg"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -144,17 +201,18 @@ input{
                 </div>
                 
                 <div class="form-label-group">
-                <input type="text" name="cpf" id="inputCPF" class="form-control" placeholder="CPF" value="<?php echo $cpfcliente;?>" required>    
+                <input disabled="disabled" type="text" name="cpf" id="inputCPF" class="form-control" placeholder="CPF" value="<?php echo $cpfcliente;?>" required>    
                 <label for="inputCPF">CPF</label>
                 </div>
+
                 
                 <div class="form-label-group">
-                <input type="date" name="nascimento" id="inputData" class="form-control" placeholder="Data de nascimento" value="<?php echo $nascimentoC;?>" required>    
+                <input type="date" name="nascimento" id="inputData" class="form-control" placeholder="Data de nascimento" maxlength="11" value="<?php echo $nascimentoC;?>" required>    
                 <label for="inputData">Data de nascimento</label>
                 </div>
 
                 <div class="form-label-group">
-                <input type="password" name="senha" id="inputPassword" class="form-control" placeholder="Senha (minímo 6 caracteres)">
+                <input type="password" name="senha" id="inputPassword" class="form-control" placeholder="Senha (minímo 6 caracteres)" minlength="6">
                 <label for="inputPassword">Senha atual</label>
                 </div>    
 

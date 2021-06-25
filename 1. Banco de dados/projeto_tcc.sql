@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 21-Maio-2021 às 01:36
+-- Tempo de geração: 20-Jun-2021 às 20:28
 -- Versão do servidor: 10.4.18-MariaDB
 -- versão do PHP: 7.4.16
 
@@ -24,23 +24,11 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `carrinho`
---
-
-CREATE TABLE `carrinho` (
-  `idcarrinho` int(11) NOT NULL,
-  `cpfCliente` int(11) DEFAULT NULL,
-  `idProduto` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Estrutura da tabela `clientes`
 --
 
 CREATE TABLE `clientes` (
-  `cpf` int(11) NOT NULL,
+  `cpf` varchar(11) NOT NULL,
   `nome` varchar(150) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `nascimento` date DEFAULT NULL,
@@ -61,8 +49,8 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`cpf`, `nome`, `email`, `nascimento`, `cep`, `endereco`, `numero`, `complemento`, `bairro`, `cidade`, `estado`, `ponto_ref`, `senha`, `nivel`) VALUES
-(12122, 'Ana Lopea', 'ana@gmail.com', '2021-05-27', '06900-000', 'Rua das Paineiras', 1263, 'Casa', 'Granjinha', 'Embu-Guaçu', 'SP', '', '9e10db1233c6e39d5adcc9c76eec9df1', 1),
-(434655418, 'Isabella de Oliveira Lopes', 'isabellaoliveira518@gmail.com', '2003-07-20', '13825-000', 'Rua Pennings', 160, 'Casa 02', 'Residencial Imigrantes', 'Holambra', 'SP', 'Perto do campo', 'e10adc3949ba59abbe56e057f20f883e', 2);
+('30325097852', 'aaa', 'is@g', '1982-03-12', '06900000', '', 0, '', '', '', '', '', '6512bd43d9caa6e02c990b0a82652dca', 1),
+('43465541804', 'Isabella de Oliveira Lopes', 'isabellaoliveira518@gmail.com', '2003-07-20', '13825-000', 'Rua Pennings', 160, 'Casa 02', 'Residencial Imigrantes', 'Holambra', 'SP', 'Perto do campo', 'e10adc3949ba59abbe56e057f20f883e', 2);
 
 -- --------------------------------------------------------
 
@@ -78,6 +66,15 @@ CREATE TABLE `mensagens` (
   `mensagem` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `mensagens`
+--
+
+INSERT INTO `mensagens` (`id`, `nome`, `email`, `telefone`, `mensagem`) VALUES
+(3, 'Isabella de Oliveira Lopes', 'isabellaoliveira518@gmail.com', '11964725556', 'sddddddddddddd'),
+(4, 's', 's@gmail.com', 's22', 's'),
+(5, 'Isabella de Oliveira Lopes', 'isabellaoliveira518@gmail.com', '11964725556', 'dx');
+
 -- --------------------------------------------------------
 
 --
@@ -89,14 +86,6 @@ CREATE TABLE `ofertas` (
   `nomeCompleto` varchar(245) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Extraindo dados da tabela `ofertas`
---
-
-INSERT INTO `ofertas` (`email`, `nomeCompleto`) VALUES
-('ana@2002', 'Ana Luiza'),
-('isabellaoliveira518@gmail.com', 'Isabella de Oliveira Lopes');
-
 -- --------------------------------------------------------
 
 --
@@ -105,7 +94,7 @@ INSERT INTO `ofertas` (`email`, `nomeCompleto`) VALUES
 
 CREATE TABLE `pedidos` (
   `idpedidos` int(11) NOT NULL,
-  `cpf` int(11) DEFAULT NULL,
+  `cpf` varchar(11) DEFAULT NULL,
   `idproduto` int(11) DEFAULT NULL,
   `data` date DEFAULT NULL,
   `qtd` int(11) DEFAULT NULL,
@@ -118,11 +107,11 @@ CREATE TABLE `pedidos` (
 --
 
 INSERT INTO `pedidos` (`idpedidos`, `cpf`, `idproduto`, `data`, `qtd`, `status`, `desconto`) VALUES
-(1, 434655418, 1, '2021-05-12', 2, 'Pedido entregue', 0),
-(2, 12122, 1, '2021-05-19', 1, 'Pedido recebido', 0),
-(45, 434655418, 13, '2021-05-19', 1, 'Pedido recebido', 3.33333),
-(46, 434655418, 14, '2021-05-19', 2, 'Pagamento aprovado', 3.33333),
-(47, 434655418, 15, '2021-05-19', 1, 'Pedido recebido', 3.33333);
+(50, '43465541804', 20, '2021-06-06', 1, 'Pedido entregue', 0),
+(51, '43465541804', 21, '2021-06-06', 1, 'Cancelado', 0),
+(52, '43465541804', 20, '2021-06-06', 1, 'Em transporte', 0),
+(53, '43465541804', 21, '2021-06-06', 1, 'Pedido recebido', 0),
+(54, '43465541804', 22, '2021-06-06', 1, 'Pedido recebido', 0);
 
 -- --------------------------------------------------------
 
@@ -132,14 +121,14 @@ INSERT INTO `pedidos` (`idpedidos`, `cpf`, `idproduto`, `data`, `qtd`, `status`,
 
 CREATE TABLE `produto` (
   `id` int(11) NOT NULL,
-  `nome` varchar(45) DEFAULT NULL,
-  `preco` decimal(10,0) DEFAULT NULL,
-  `descricao` varchar(300) DEFAULT NULL,
+  `nome` varchar(255) DEFAULT NULL,
+  `preco` double DEFAULT NULL,
+  `descricao` varchar(1500) DEFAULT NULL,
   `ficha_tecnica` varchar(1200) DEFAULT NULL,
   `quantidade` int(11) DEFAULT NULL,
   `situacao` varchar(13) DEFAULT NULL,
   `criado` datetime DEFAULT NULL,
-  `imagem` varchar(45) DEFAULT NULL
+  `imagem` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -147,10 +136,11 @@ CREATE TABLE `produto` (
 --
 
 INSERT INTO `produto` (`id`, `nome`, `preco`, `descricao`, `ficha_tecnica`, `quantidade`, `situacao`, `criado`, `imagem`) VALUES
-(1, 'Carvão 2kg', '26', 'Preto', 'teste', 10, 'Disponível', '2021-05-02 23:10:18', '2021.05.18-21.19.46jpeg'),
-(13, 'Zézinho', '42', 'Bom demais para logos', '', 170, 'Disponível', '2021-05-11 14:00:26', '2021.05.11-19.00.26.png'),
-(14, 'Zézinho', '41', 'Bom demais para logos', '', 170, 'Disponível', '2021-05-11 14:11:48', '2021.05.17-15.44.53jpeg'),
-(15, 'oo', '14', 'uuutgv hgvfgh jhbj', '', 9, 'Disponível', '2021-05-11 14:16:33', '2021.05.11-19.16.33.png');
+(20, 'Carvão vegetal para churrasco pacote de 5kg - Zezinho', 17, 'Carvão Zezinho vegetal 100% eucalipto, pacotes de 5Kg Carvão especial para churrasco, limpo e granulado. Nosso carvão é selecionado e tratado para que nossos clientes tenham o melhor churrasco com seus amigos e familiares. Produto com facilidade para ascender e durabilidade no seu desempenho. Zezinho do Carvão trabalha de acordo com as normas legais e com foco em qualidade e satisfação.', '', 15, 'Disponível', '2021-06-05 11:25:50', '2021.06.05-16.25.50.jpg'),
+(21, 'Tábua Para Churrasco - Zezinho ', 41.6, 'Á tábua Zezinho praticamente é uma peça de decoração para sua mesa, seu estilo traz o detalhe diferencial no seu espaço gourmet, na cozinha ou área de churrasqueira. Com ela, você pode servir seus lanches e variações para os seus convidados, para que eles tenham uma experiencia diferenciada. Ela também e uma excelente opção para presentear aquele seu amigo ou familiar que gosta de inventar coisas na cozinha.', '', 25, 'Disponível', '2021-06-05 11:32:02', '2021.06.05-16.32.02.jpg'),
+(22, 'Churrasqueira a Carvão Portátil a Bafo Metávila', 450, 'Churrasqueira a Carvão Portátil a Bafo Metávila - Acompanha 1 grelha e é ideal para ser colocada em áreas abertas, pois não exige instalação. Já vem pronta para uso, ocupando assim, menos espaço na sua varanda ou área de lazer.', '', 10, 'Disponível', '2021-06-05 16:55:54', '2021.06.05-21.55.54.jpg'),
+(23, 'Kit Para Churrasco Aço Inox 18 Peças  ', 180, 'O famoso churrasquinho de fim de semana é tradição em todo Brasil. Famílias e amigos se reúnem e celebram juntos, com muita música, alegria e comida boa. E claro, um bom churrasqueiro merece ter bons equipamentos. Este maravilhoso Kit Churrasco traz elegância e facilidade para um corte perfeito. O Kit Churrasco 18 Peças possui: 1 garfo, 1 espátula, 1 pegador, 1 faca, 1 escova, 1 pincel, 4 espetos e 8 pegadores de petisco, TODOS em aço inox!', '', 30, 'Disponível', '2021-06-05 17:00:59', '2021.06.05-22.00.59.jpg'),
+(24, 'Molho de pimenta Premium - Zezinho ', 20, 'Pimenta Premium Zezinho, vem originalmente da cidade de Mogi Mirim, do estado São Paulo, localizado no interior. Ela é o resultado do cruzamento das seguintes espécies de pimentas: Habanero, Naga Bhut Jolokia, Orégano e Boldo-do-chile.', '', 75, 'Disponível', '2021-06-05 17:07:38', '2021.06.05-22.07.38.jpg');
 
 -- --------------------------------------------------------
 
@@ -160,7 +150,7 @@ INSERT INTO `produto` (`id`, `nome`, `preco`, `descricao`, `ficha_tecnica`, `qua
 
 CREATE TABLE `promocao` (
   `codpromo` varchar(11) NOT NULL,
-  `valordesconto` float DEFAULT NULL
+  `valordesconto` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -168,17 +158,11 @@ CREATE TABLE `promocao` (
 --
 
 INSERT INTO `promocao` (`codpromo`, `valordesconto`) VALUES
-('DESC10', 10);
+('ISA', 10.5);
 
 --
 -- Índices para tabelas despejadas
 --
-
---
--- Índices para tabela `carrinho`
---
-ALTER TABLE `carrinho`
-  ADD PRIMARY KEY (`idcarrinho`);
 
 --
 -- Índices para tabela `clientes`
@@ -224,19 +208,19 @@ ALTER TABLE `promocao`
 -- AUTO_INCREMENT de tabela `mensagens`
 --
 ALTER TABLE `mensagens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `idpedidos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `idpedidos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de tabela `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

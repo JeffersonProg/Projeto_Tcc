@@ -5,22 +5,22 @@
    
     //verifica se a variavel está definida
     if(isset($_POST['acao'])){ 
-     $idpedidos = $_POST['codigo'];
-     $status = $_POST['statusPedido'];
-        $data = date('Y-m-d H:i:s');
-        $sql = $pdo->prepare("UPDATE pedidos SET status=?,data=? WHERE idpedidos=?");
-        $sql->execute(array($status,$data,$idpedidos));
+     $codPromo = $_POST['codPromo'];
+     $valorDesc = $_POST['valorDesc'];
+    
+        $sql = $pdo->prepare("INSERT INTO promocao(codpromo,valordesconto) VALUE (?,?)");
+        $sql->execute(array($codPromo,$valorDesc));
 
         if($sql) {
             echo "<script>
-            location.href='http://localhost/projeto_tcc/painel/painel-admin.php?pedidos=Listar+Pedidos';
+            location.href='http://localhost/projeto_tcc/painel/painel-admin.php?produtos=Listar+Produtos';
         </script>";
         }
         else {
             echo "
             <script> 
                 alert ('Não foi possível alterar o pedido!');  
-                location.href='http://localhost/projeto_tcc/painel/painel-admin.php?pedidos=Listar+Pedidos';
+                location.href='http://localhost/projeto_tcc/painel/painel-admin.php?produtos=Listar+Produtos';
                 </script>";
         }
 

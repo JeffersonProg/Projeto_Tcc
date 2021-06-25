@@ -7,7 +7,7 @@ $resultado2 = mysqli_query($conn, $result2);
 $resultado1_postagem = mysqli_query($conn, $result1_postagem);}
 ?>	
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,7 +19,7 @@ $resultado1_postagem = mysqli_query($conn, $result1_postagem);}
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <link href="../../estilo/style.css" rel="stylesheet">
+    <link href="../../estilo/estilo.css" rel="stylesheet">
 
 	<style type="text/css">
 body{
@@ -262,7 +262,7 @@ a.list{
 <a class="list2" style="color:#666666"><?php echo $dado["nome"]."<br>";?></a> 
 <a class="list" style="color:gray">(Cód. <?php echo $dado["id"];?>)<br></a><br>
 <a class="list" style="color:#666666"><?php echo $dado["descricao"]."<br>";?></a><br>
-<a class="list2" style="color:#666666">R$<?php echo $dado["preco"]."<br>"; $preco = $dado["preco"];?></a>
+<a class="list2" style="color:#666666">R$<?php echo number_format($dado['preco'], 2, ',', '.');?></a>
 
 
 <br>
@@ -295,7 +295,7 @@ a.list{
               </div>
 
               <div class="form-label-group">
-              <input type="number" id="inputPreco" name="preco" class="form-control" placeholder="" value="<?php echo $dado["preco"]?>" required autofocus>
+              <input type="number" step="any" id="inputPreco" name="preco" class="form-control" placeholder="" value="<?php echo $dado["preco"]?>" required autofocus>
               <label for="inputPreco">Preço</label>
               </div>
 

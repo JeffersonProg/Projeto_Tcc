@@ -1,11 +1,23 @@
 <?php
-session_start();?>
+// A sessão precisa ser iniciada em cada página diferente
+if (!isset($_SESSION)) session_start();
+$nivel_necessario = 2;
+  
+// Verifica se não há a variável da sessão que identifica o usuário
+if (!isset($_SESSION['usuarioCpf']) OR ($_SESSION['nivel'] < $nivel_necessario)) {
+  // Destrói a sessão por segurança
+  session_destroy();
+  // Redireciona o visitante de volta pro login
+  header("Location: login.php"); exit;
+}
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Painel Administrativo</title>
+    <link rel="icon" href="../imagens/ZeLOGO.svg" >
    <!-- CSS only -->
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
@@ -20,18 +32,18 @@ session_start();?>
 body {
   margin: 0 auto;
   padding: 0;
-  background-color: #17a2b8;
+  background-color: #1E90FF;
 }
 
 .navcor{
-    background-color:#17a2b8;
+    background-color:#1E90FF;
     color:white;
     font-size:17px;
     font-weight:bold;
 }
 
 .navcor1{
-    background-color:#17a2b8;
+    background-color:#1E90FF;
     color:white;
     font-size:17px;
     font-weight:bold;
@@ -43,7 +55,7 @@ body {
 }
 
 .botaonovo{
-    background-color:#17a2b8;
+    background-color:#1E90FF;
     color:white;
     border:none;
     color:white;

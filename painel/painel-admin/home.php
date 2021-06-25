@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -77,10 +77,10 @@ excluir usuários e também a possibilidade de gerenciar pedidos e novos adminis
 <div class="estilopequeno">
 <table class="estilopequeno">
   <tbody>
-    <tr>
-      <td class="botaoo" style="background-color:#20B2AA">LISTAR PRODUTOS</td>
-      <td class="botaoo" style="background-color:#008B8B">LISTAR USUÁRIOS</td>
-      <td class="botaoo" style="background-color:#008080">CADASTRAR PEDIDOS</td>
+    <tr></td> 
+       <td class="botaoo"  style="background-color:#B0C4DE;color:black" href="/painel/painel-admin.php?produtos=Listar+Produtos"> LISTAR PRODUTOS</td> 
+      <td class="botaoo" style="background-color:#B0C4DE;color:black">LISTAR USUÁRIOS</td>
+      <td class="botaoo" style="background-color:#B0C4DE;color:black">CADASTRAR PEDIDOS</td>
 
     </tr>
   </tbody>
