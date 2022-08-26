@@ -1,7 +1,5 @@
 ﻿# Projeto_Tcc
  
  '''
- 
  Projeto
- 
  '''
